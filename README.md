@@ -58,7 +58,7 @@ For instance, `vllm_model_evaluation/model_configs/EngGPT2-16B-A3B/template_conf
 ├── utils/                         # Shared python utilities across the repository
 ├── evalscope_evaluation/          # Scripts for EvalScope pipeline
 ├── italic_evaluation/             # Scripts and configs for ITALIC benchmark (in its original setting, from https://github.com/Crisp-Unimib/ITALIC)
-├── model_evaluation/              # Standard HF Transformers evaluations
+├── hf_model_evaluation/           # Standard HF Transformers evaluations
 └── vllm_model_evaluation/         # vLLM-accelerated evaluation pipelines
     ├── model_configs/             # Model-specific YAML configurations
     └── scripts/                   # Scripts for lm-eval pipeline
