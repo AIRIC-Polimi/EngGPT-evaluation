@@ -40,7 +40,7 @@ Because utility functions are shared across the repository in the `shared_utils`
 
 ```bash
 # Run the main vLLM parametric evaluation script
-PYTHONPATH=. uv run vllm_model_evaluation/scripts/run_evaluations_parametric.py --models AIRIC-Polimi/EngGPT2Moe --tasks mmlu_cot_llama
+PYTHONPATH=. uv run vllm_model_evaluation/scripts/run_evaluations_parametric.py --models engineering-group/EngGPT2-16B-A3B --tasks arc_challenge_chat
 ```
 
 *Note: The first time you run a script, `uv` will automatically download the correct Python version and all required libraries (e.g., `torch`, `vllm`, `lm-eval`) into a cached, isolated environment.*
