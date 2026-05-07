@@ -257,7 +257,7 @@ if __name__ == "__main__":
         serve_model_and_eval_bfcl_v4(
             model_name_hub=model,
             vllm_log_path=f"{model.split('/')[-1][:15]}_bfcl_vllm_logs.log",
-            eval_work_dir="/workspaces/EngGPT-eval/data/bfcl-v4",
+            eval_work_dir=str(Path(__file__).parent.parent.parent / "data" / "bfcl-v4"),
             batch_size=config.batch_size,
             generation_config=config.generation_config,
             is_fc_model=config.is_fc_model,
