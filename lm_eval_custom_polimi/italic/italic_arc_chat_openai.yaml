@@ -1,0 +1,35 @@
+task: italic_from_arc_chat_openai
+tag: arc_challenge_chat_openai
+dataset_path: Crisp-Unimib/ITALIC
+output_type: generate_until
+test_split: train
+doc_to_text: "Data la seguente domanda e possibili risposte, scegli la risposta migliore.\nDomanda: {{ question.strip() }}\n{% for opt in options -%}{{ 'ABCDE'[loop.index0] }}. {{ opt }}{% endfor -%}\nLa tua risposta deve terminare con 'La risposta corretta è [lettera_della_risposta]' dove la [lettera_della_risposta] è una tra le opzioni disponibili."
+gen_prefix: 'La risposta corretta è'
+doc_to_target: "{{ 'ABCDE'[answer|int] }}"
+generation_kwargs:
+  max_gen_toks: 100
+  until:
+    - "\n\n"
+    - "."
+filter_list:
+  # - name: remove_whitespace
+  #   filter:
+  #     - function: remove_whitespace
+  #     - function: take_first
+  - name: strict_match
+    filter:
+      - function: "regex"
+        regex_pattern: La risposta corretta è [^A-E]*([A-E])
+        group_select: -1
+      - function: take_first
+metric_list:
+  - metric: exact_match
+    aggregation: mean
+    higher_is_better: true
+    ignore_case: true
+    ignore_punctuation: true
+num_fewshot: 5
+fewshot_split: train
+fewshot_delimiter: "\n\n"
+metadata:
+  version: 1.0

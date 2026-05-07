@@ -1,0 +1,18 @@
+model: azure-openai-chat-completions
+model_args:
+  model: gpt-5-mini
+  num_concurrent: 10
+
+tasks:
+  - none # Will be injected by run script
+
+gen_kwargs:
+  max_gen_toks: 35000
+
+apply_chat_template: true
+confirm_run_unsafe_code: true
+
+include_path: lm_eval_custom_polimi
+
+output_path: data # Will be appended by run script
+log_samples: true

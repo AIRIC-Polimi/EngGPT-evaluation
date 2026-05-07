@@ -1,0 +1,112 @@
+models:
+  - provider: vllm
+    model: "engineering-group/EngGPT2-16B-A3B"
+    api_key: EMPTY
+    provider_kwargs:
+      max_model_len: 20000
+  - provider: vllm
+    model: "Almawave/Velvet-14B"
+    api_key: EMPTY
+    provider_kwargs:
+      max_model_len: 4096
+  - provider: vllm
+    model: Qwen/Qwen3-8B
+    api_key: EMPTY
+    provider_kwargs:
+      max_model_len: 20000
+  - provider: vllm
+    model: Qwen/Qwen3-4B
+    api_key: EMPTY
+    provider_kwargs:
+      max_model_len: 20000
+  - provider: vllm
+    model: deepseek-ai/deepseek-moe-16b-chat
+    api_key: EMPTY
+    provider_kwargs:
+      max_model_len: 4096
+  - provider: vllm
+    model: sapienzanlp/Minerva-7B-instruct-v1.0
+    api_key: EMPTY
+    provider_kwargs:
+      max_model_len: 4096
+  - provider: vllm
+    model: Fastweb/FastwebMIIA-7B
+    api_key: EMPTY
+    provider_kwargs:
+      max_model_len: 8192
+  - provider: azure_openai
+    model: gpt5-nano # -2025-08-07
+    api_key: ${oc.env:AZURE_OPENAI_API_KEY}
+    provider_kwargs:
+      azure_endpoint: ${oc.env:AZURE_OPENAI_ENDPOINT}
+      azure_api_version: ${oc.env:AZURE_OPENAI_API_VERSION}
+      azure_deployment: gpt-5-nano
+  - provider: vllm
+    model: swap-uniba/LLaMAntino-3-ANITA-8B-Inst-DPO-ITA
+    api_key: EMPTY
+    provider_kwargs:
+      max_model_len: 4096
+  - provider: vllm
+    model: openai/gpt-oss-20b
+    api_key: EMPTY
+    provider_kwargs:
+      max_model_len: 20000
+  - provider: vllm
+    model: moonshotai/Moonlight-16B-A3B-Instruct
+    api_key: EMPTY
+    provider_kwargs:
+      max_model_len: 4096
+  - provider: vllm
+    model: meta-llama/Llama-3.1-8B-Instruct
+    api_key: EMPTY
+    provider_kwargs:
+      max_model_len: 20000
+  - provider: vllm
+    model: meta-llama/Llama-3.2-3B-Instruct
+    api_key: EMPTY
+    provider_kwargs:
+      max_model_len: 20000
+  - provider: vllm
+    model: google/gemma-3-4b-it
+    api_key: EMPTY
+    provider_kwargs:
+      max_model_len: 20000
+  - provider: vllm
+    model: google/gemma-3-12b-it
+    api_key: EMPTY
+    provider_kwargs:
+      max_model_len: 20000
+  - provider: vllm
+    model: mistralai/Ministral-3-8B-Instruct-2512-BF16
+    api_key: EMPTY
+    provider_kwargs:
+      max_model_len: 20000
+temperature: 0.0
+max_tokens: 2000
+
+system_message: # set a custom system message
+
+# (for custom OpenAI-compatible API)
+provider_kwargs:
+  base_url: http://localhost:8000/v1 # example for vllm default
+
+rate_limiting:
+  enabled: false
+  requests_per_minute: 10
+
+limit: # limit to n examples
+fast: true # use CoT or not
+
+data:
+  data_file: # insert path to your data file
+  few_shot_file: ./eval_config/5_shots.jsonl # Set as null to run zero-shot evaluation
+  num_few_shots: 5 # Number of few-shots (between 0 and 5). Note: 0 implies zero-shot evaluation.
+  output_dir: /workspaces/EngGPT-evaluation/data
+
+num_threads: 10
+
+auto_resume: true # resume from last checkpoint
+
+checkpointing:
+  enabled: true
+  checkpoint_interval: 50

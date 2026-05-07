@@ -1,0 +1,66 @@
+line-length = 120
+
+exclude = [
+    "notebooks"
+]
+
+[lint]
+preview = true
+select = [
+    # Ruff defaults (some pycodestyle errors, all pyflakes)
+    "E4",
+    "E7",
+    "E9",
+    "F",
+    # Bandit (security rules)
+    "S",
+    # Eradicate (commented code)
+    "ERA",
+    # Async-await related
+    "ASYNC",
+    # Comprehensions
+    "C4",
+    # Executable files
+    "EXE",
+    # Logging and logging format
+    "LOG",
+    "G",
+    # No prints
+    "T20",
+    # Return statements (e.g., superfluous else after return)
+    "RET",
+    # Private member access outside of class
+    "SLF",
+    # Simplifications
+    "SIM",
+    # Pathlib instead of raw os module
+    "PTH",
+    # McCabe complexity (limit in `tool.ruff.lint.mccabe.max-complexity`)
+    "C901",
+    # Numpy
+    "NPY",
+    # Pandas
+    "PD",
+    # Naming conventions
+    "N",
+    # Docstrings
+    "DOC",
+    # Various ruff-specific rules
+    "RUF"
+]
+ignore = [
+    "N806",  # non-lowercase-variable-in-function (e.g., X, Yt, ...)
+    "S101"   # no use of assert
+]
+
+[lint.mccabe]
+# Flag errors (`C901`) whenever the complexity level exceeds max-complexity.
+max-complexity = 10
+
+[lint.per-file-ignores]
+"__init__.py" = [
+    "F401"  # unused-import
+]
+"test*.py" = [
+    "S101"  # assert
+]

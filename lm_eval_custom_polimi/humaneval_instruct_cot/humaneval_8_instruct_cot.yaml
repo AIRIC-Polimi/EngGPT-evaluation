@@ -1,0 +1,25 @@
+task: humaneval_8_instruct_cot
+dataset_path: openai/openai_humaneval
+unsafe_code: true
+output_type: generate_until
+test_split: test
+doc_to_text: "Write a solution to the following problem and make sure it passes the tests:\n```python\n{{ prompt }}\n```\nStart your response by repeating the following and then continue with your solution:\n```python\n{{ prompt }}\n"
+doc_to_target: "{{test}}\ncheck({{entry_point}})"
+generation_kwargs:
+  until:
+    - "</s>"
+  do_sample: true
+repeats: 8
+metric_list:
+  - metric: !function utils.pass_at_k
+    aggregation: mean
+    higher_is_better: true
+    k: [1,2,4,8]
+filter_list:
+  - name: "create_test"
+    filter:
+      - function: "custom"
+        filter_fn: !function utils.build_predictions_instruct_reason
+num_fewshot: 0
+metadata:
+  version: 4.0

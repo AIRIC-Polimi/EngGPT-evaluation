@@ -1,0 +1,37 @@
+tag: EngGPT
+task: arc_challenge_cot_it_fixed
+dataset_path: alexandrainst/m_arc
+dataset_name: it
+output_type: generate_until
+training_split: train
+validation_split: val
+test_split: test
+fewshot_split: train
+doc_to_text: "Data la seguente domanda e quattro possibili risposte (A, B, C e D), scegli la risposta migliore.\n\nDomanda: {{instruction}}\nA. {{option_a}}\nB. {{option_b}}\nC. {{option_c}}\nD. {{option_d}}\n\n- Per problemi semplici:\nFornisci direttamente la risposta con una spiegazione minima.\n\n- Per problemi complessi:\nUsa questo formato passo dopo passo:\n## Passo 1: [Descrizione concisa]\n[Breve spiegazione]\n## Passo 2: [Descrizione concisa]\n[Breve spiegazione]\n\nIndipendentemente dall’approccio, concludi sempre con:\nLa risposta corretta è [lettera_della_risposta].\ndove [lettera_della_risposta] è una tra A, B, C o D.\n\nPensa passo dopo passo."
+fewshot_delimiter: "\n\n"
+doc_to_target: "{{answer}}"
+generation_kwargs:
+  until:
+    - "</s>"
+metric_list:
+  - metric: exact_match
+    aggregation: mean
+    higher_is_better: true
+    ignore_case: true
+    ignore_punctuation: true
+filter_list:
+  - name: flexible_extract
+    filter:
+      - function: regex
+        regex_pattern: "(?:^|\\b)([A-D])(?:\\.|\\b)"
+        group_select: -1
+      - function: take_first
+  - name: strict_match
+    filter:
+      - function: "regex"
+        regex_pattern: La risposta corretta è (.+?)(?:\.)?$
+        group_select: -1
+      - function: take_first
+num_fewshot: 5
+metadata:
+  version: 2.0

@@ -1,0 +1,4 @@
+include: "_default_fixed_template_yaml"
+task: "mmlu_pro_fixed_llama_other"
+task_alias: "other"
+process_docs: !function utils.process_other

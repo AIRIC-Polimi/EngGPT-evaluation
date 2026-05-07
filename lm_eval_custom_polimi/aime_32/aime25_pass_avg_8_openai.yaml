@@ -1,0 +1,35 @@
+task: aime25_pass_avg_8_openai
+dataset_path: math-ai/aime25
+output_type: generate_until
+training_split: test
+fewshot_split: test
+test_split: test
+doc_to_text: "Given the following question, always answer using latex syntax for mathematics. The final answer must be included in '\\boxed{}'.\nQuestion: {{problem}}\nAnswer:"
+doc_to_target: "{{answer}}"
+metric_list:
+  - metric: !function utils.pass_at_k
+    aggregation: mean
+    higher_is_better: true
+    k: [1,2,4,8]
+  - metric: !function utils.avg_at_k
+    aggregation: mean
+    higher_is_better: true
+    k: [1,2,4,8]
+filter_list:
+  - name: "exact_match"
+    filter:
+      - function: "custom"
+        filter_fn: !function utils.extract_all_responses
+generation_kwargs:
+  until:
+    - "Question:"
+    - "</s>"
+    - "<|im_end|>"
+    - "<|eot_id|>"
+  do_sample: false
+  temperature: 0.0
+  max_gen_toks: 32768
+repeats: 8
+num_fewshot: 0
+metadata:
+  version: 1.0

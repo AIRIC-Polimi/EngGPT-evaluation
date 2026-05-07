@@ -1,0 +1,22 @@
+model: vllm
+model_args:
+  pretrained: # Will be injected by run script
+  dtype: float16 # Use float16 for faster inference on compatible GPUs
+  trust_remote_code: true
+  # max_model_len: 40000  # Force vLLM to allocate longer contexts to have room for long CoTs (NOTE: this might degrate performance as the model was trained for up to 4096 context length)
+gen_kwargs:
+  # max_gen_toks: 2048 # Model supports only 4096 tokens, and must leave some space for the prompt
+
+tasks:
+  - none # Will be injected by run script
+
+batch_size: auto
+device: cuda:0
+
+include_path: lm_eval_custom_polimi
+
+apply_chat_template: true
+confirm_run_unsafe_code: true
+
+output_path: data # Will be appended by run script
+log_samples: true

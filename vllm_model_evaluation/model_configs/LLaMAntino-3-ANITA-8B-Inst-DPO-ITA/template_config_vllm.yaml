@@ -1,0 +1,22 @@
+model: vllm
+model_args:
+  pretrained: # Will be injected by run script
+  dtype: float16 # Use float16 for faster inference on compatible GPUs
+  trust_remote_code: true
+
+gen_kwargs:
+  max_gen_toks: 4096  # Model supports only 8196 tokens, and must leave some space for the prompt
+
+tasks:
+  - none # Will be injected by run script
+
+include_path: lm_eval_custom_polimi
+
+batch_size: auto
+device: cuda:0
+
+apply_chat_template: true
+confirm_run_unsafe_code: true
+
+output_path: data # Will be appended by run script
+log_samples: true

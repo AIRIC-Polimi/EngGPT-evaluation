@@ -1,0 +1,33 @@
+task: italic_from_mmlu_cot
+tag: mmlu_cot
+dataset_path: Crisp-Unimib/ITALIC
+output_type: generate_until
+test_split: train
+doc_to_text: !function utils.doc_to_text_mmlu_cot_fewshot
+doc_to_target: !function utils.doc_to_target
+generation_kwargs:
+  until:
+  - "</s>"
+  max_gen_toks: 4096
+filter_list:
+  - name: strict_match
+    filter:
+      - function: "regex"
+        regex_pattern: "risposta corretta è [^A-E]*([A-E])"
+        group_select: -1
+      - function: take_first
+  - name: flexible_extract
+    filter:
+      - function: regex
+        regex_pattern: "(?:^|\\b)([A-E])(?:\\.|\\b)"
+        group_select: -1
+      - function: take_first
+metric_list:
+  - metric: exact_match
+    aggregation: mean
+    higher_is_better: true
+    ignore_case: true
+    ignore_punctuation: true
+num_fewshot: 0
+metadata:
+  version: 1.0
