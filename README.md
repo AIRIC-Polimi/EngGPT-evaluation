@@ -1,4 +1,4 @@
-# EngGPT Evaluation Framework
+# EngGPT2-16B-A3B Evaluation Framework
 
 [![Paper](https://img.shields.io/badge/Paper-arXiv-red.svg)](https://arxiv.org/abs/XXXX.XXXXX)
 [![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Models-blue)](engineering-group/EngGPT2-16B-A3B)
