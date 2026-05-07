@@ -28,8 +28,8 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 
 ### 2. Clone the Repository
 ```bash
-git clone https://github.com/AIRIC-Polimi/[Repo-Name].git
-cd [Repo-Name]
+git clone https://github.com/AIRIC-Polimi/EngGPT-evaluation.git
+cd EngGPT-evaluation
 ```
 
 ## 🏃‍♂️ Running Evaluations
