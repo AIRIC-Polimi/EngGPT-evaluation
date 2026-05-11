@@ -1,6 +1,6 @@
 # EngGPT2-16B-A3B Evaluation Framework
 
-[![Paper](https://img.shields.io/badge/Paper-arXiv-red.svg)](https://arxiv.org/abs/XXXX.XXXXX)
+[![Paper](https://img.shields.io/badge/Paper-arXiv-red.svg)](https://arxiv.org/abs/2605.07731)
 [![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Models-blue)](engineering-group/EngGPT2-16B-A3B)
 
 Official evaluation repository for the paper *"Benchmarking EngGPT2-16B-A3B against Comparable Italian and International Open-source LLMs"*. 
@@ -69,13 +69,14 @@ For instance, `vllm_model_evaluation/model_configs/EngGPT2-16B-A3B/template_conf
 If you use this evaluation framework, the custom benchmark implementations, or our models in your research, please cite our work:
 
 ```bibtex
-@misc{author2026enggpt,
-      title={[Paper Title]}, 
-      author={[Author 1] and [Author 2] and [Author 3]},
+@misc{sassella2026benchmarkingenggpt216ba3bcomparableitalian,
+      title={Benchmarking EngGPT2-16B-A3B against Comparable Italian and International Open-source LLMs}, 
+      author={Andrea Sassella and Andrea Chizzola and Tommaso Bianchi and Luca Alessandrelli and Mark James Carman},
       year={2026},
-      eprint={XXXX.XXXXX},
+      eprint={2605.07731},
       archivePrefix={arXiv},
-      primaryClass={cs.CL}
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2605.07731}, 
 }
 ```
 
